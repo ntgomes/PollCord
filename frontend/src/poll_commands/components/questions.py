@@ -10,13 +10,3 @@ class MCQuestion(object):
         embed.add_field(name="Question", value=self.question)
         embed.add_field(name="Options", value=self.options)
         return embed
-
-
-class OpenQuestion(object):
-    def __init__(self, question):
-        self.question = question
-
-    def as_embed(self, number):
-        embed = discord.Embed(title=f"Question {number} (Open Ended)")
-        embed.add_field(name="Question", value=self.question)
-        return embed
