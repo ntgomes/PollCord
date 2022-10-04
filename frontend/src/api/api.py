@@ -8,6 +8,8 @@ from dotenv import load_dotenv
 Client class that be used to make HTTP calls to the backend to save
 and fetch poll information for PollCord.
 """
+
+
 class BackendClient(object):
     def __init__(self):
         """Constructor. Depends on API_HOSTNAME defined in .env file within the root frontend folder"""
@@ -16,12 +18,14 @@ class BackendClient(object):
         self.session = http.Session()
 
         # This is so that the client promises to sends and retrieves in JSON
-        self.session.headers.update({'Content-Type': 'application/json'})
-    
+        self.session.headers.update({"Content-Type": "application/json"})
+
     def check_if_poll_exists(self, guild_id, poll_name):
         """Makes a GET request to /check/<guild_id>/<poll_name> endpoint to see if the given guild ID and poll
         name combination already exist in the backend. Returns true if so, false otherwise."""
-        return self.session.get(self.api_hostname + "/check/{0}/{1}".format(guild_id, poll_name)).json()['exists']
+        return self.session.get(
+            self.api_hostname + "/check/{0}/{1}".format(guild_id, poll_name)
+        ).json()["exists"]
 
     def save_poll_results(self, guild_id, poll_name, result_data):
         """
@@ -46,10 +50,12 @@ class BackendClient(object):
             }
         """
         return self.session.post(
-            self.api_hostname + "/save", 
-            json.dumps({"guild_id": guild_id, "poll_name": poll_name, "results": result_data})
-        ).json()['success']
-    
+            self.api_hostname + "/save",
+            json.dumps(
+                {"guild_id": guild_id, "poll_name": poll_name, "results": result_data}
+            ),
+        ).json()["success"]
+
     def recall_poll(self, guild_id, poll_name):
         """
         Makes a GET request to /recall/<guild_id>/<poll_name> endpoint to see if the given guild ID and poll
@@ -76,4 +82,6 @@ class BackendClient(object):
                 }
             }
         """
-        return self.session.get(self.api_hostname + "/recall/{0}/{1}".format(guild_id, poll_name)).json()
+        return self.session.get(
+            self.api_hostname + "/recall/{0}/{1}".format(guild_id, poll_name)
+        ).json()
