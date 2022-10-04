@@ -4,11 +4,12 @@ import json
 
 from dotenv import load_dotenv
 
-"""
-Client class that be used to make HTTP calls to the backend to save
-and fetch poll information for PollCord.
-"""
 class BackendClient(object):
+    """
+    Client class that be used to make HTTP calls to the backend to save
+    and fetch poll information for PollCord.
+    """
+    
     def __init__(self):
         """Constructor. Depends on API_HOSTNAME defined in .env file within the root frontend folder"""
         load_dotenv()
