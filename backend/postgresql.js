@@ -1,9 +1,10 @@
-import postgresql from "pg";
-import os from "os";
+const pg =require("pg");
+require('dotenv').config()
 
-const { Pool } = postgresql;
 
-export default (callback = null) => {
+const { Pool } = pg;
+
+ var test=()=>{
     // NOTE: PostgreSQL creates a superuser by default on localhost using the OS username.
 
     const pool = new Pool({
@@ -34,11 +35,10 @@ export default (callback = null) => {
         },
     };
 
-    process.postgresql = connection;
+   
 
-    if (callback) {
-        callback(connection);
-    }
+   
 
     return connection;
 };
+module.exports = test;
