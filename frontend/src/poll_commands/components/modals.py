@@ -11,12 +11,15 @@ class MCPollModal(discord.ui.Modal):
         self.val = None
 
     async def callback(self, interaction: discord.Interaction):
-        self.val = questions.MCQuestion(self.children[0].value, self.children[1].value)
-        embed = discord.Embed(title="Question Added to Poll")
-        embed.add_field(name="Question", value=self.children[0].value)
-        embed.add_field(name="Options", value=self.children[1].value)
+        if len(self.children[1].value.split(",")) > 25:
+            await interaction.response.edit_message(embeds=[discord.Embed(title="You can't have more than 25 options")])
+        else:
+            self.val = questions.MCQuestion(self.children[0].value, self.children[1].value)
+            embed = discord.Embed(title="Question Added to Poll")
+            embed.add_field(name="Question", value=self.children[0].value)
+            embed.add_field(name="Options", value=self.children[1].value)
 
-        await interaction.response.edit_message(embeds=[embed])
+            await interaction.response.edit_message(embeds=[embed])
 
 
 class RemoveModal(discord.ui.Modal):
