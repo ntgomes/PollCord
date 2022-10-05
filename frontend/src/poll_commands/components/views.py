@@ -4,7 +4,7 @@ from poll_commands.components.modals import MCPollModal, RemoveModal
 
 class MakerButtons(discord.ui.View):
     """
-    Main view used for authoring new polls
+    Main view used for authoring new polls. Currently, only responds to maker of the poll.
     :parameter poll_name: name of the poll
     :parameter guild_id: the guild id of where of poll is
     :parameter question_dict: a dict key:(guild_id,poll_name) value:[MCQuestions]
@@ -64,6 +64,15 @@ class MakerButtons(discord.ui.View):
 
 class PollButtons(discord.ui.View):
     def __init__(self, poll_name, guild_id, question_dict, result=None, question_num=0):
+        """
+        a view responsible for taking input from an ongoing poll, storing the results, and writing them to the api.
+        :param poll_name: poll_name
+        :param guild_id: the current guild the poll is happening
+        :param question_dict: question_dict with all the current questions
+        :param result: passed in from previous views to make up for the fact you can't update views
+        :param question_num: current question number
+        """
+
         super().__init__(timeout=None)
         if result is None:
             result = {}
@@ -77,6 +86,10 @@ class PollButtons(discord.ui.View):
         self.answers = {}  # key:user_name value:voted on answer
 
     def as_selector_options(self):
+        """
+        helper function to convert a list of quesiton into a [discord.SelectOption] for the Select ui element
+        :return: [discord.SelectOption]
+        """
         options = []
         answers = self.question_dict[(self.guild_id, self.poll_name)][self.question_num].options.split(",")
         for i in answers:
@@ -84,6 +97,10 @@ class PollButtons(discord.ui.View):
         return options
 
     def make_select(self):
+        """
+        dynamically makes a select from the current question being polled
+        :return: discord.Select representing the options for the current question
+        """
         answer_selector = discord.ui.Select(
             min_values=1,
             max_values=1,
@@ -100,6 +117,10 @@ class PollButtons(discord.ui.View):
         return answer_selector
 
     def result_embeds(self):
+        """
+        basic function to format the results of a poll into embeds for display at the end of a poll.
+        :return: list of discord.Embed objects
+        """
         finish_embed = discord.Embed(title=f"Poll Finish({self.poll_name})")
         embeds = [finish_embed]
         for question in self.results.keys():
@@ -123,6 +144,7 @@ class PollButtons(discord.ui.View):
             embed = self.result_embeds()
             await interaction.response.edit_message(embeds=embed, view=None)
         else:
+            # makes a new view since you can't update a currently existing view right now
             await interaction.response.edit_message(view=PollButtons(self.poll_name,
                                                                      self.guild_id,
                                                                      self.question_dict,
