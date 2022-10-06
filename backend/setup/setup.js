@@ -15,7 +15,7 @@ connection
     );
     `
     )
-    .then((res) => {
+    .then(() => {
         connection
             .query(
                 `
@@ -26,7 +26,7 @@ connection
         );
         `
             )
-            .then((res1) => {
+            .then(() => {
                 connection
                     .query(
                         `
@@ -37,7 +37,7 @@ connection
             );
             `
                     )
-                    .then((res2) => {
+                    .then(() => {
                         console.log("DB creation scucesfull");
                     });
             });
