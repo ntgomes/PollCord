@@ -2,9 +2,7 @@ require("dotenv").config();
 
 const postgresql = require("../postgresql");
 
-// Create and Mock up, to clean up nicely and place in functions
 var connection = postgresql();
-// Create
 connection
     .query(
         `
@@ -38,7 +36,7 @@ connection
             `
                     )
                     .then(() => {
-                        console.log("DB creation scucesfull");
+                        console.log("DB creation successfull");
                     });
             });
     });

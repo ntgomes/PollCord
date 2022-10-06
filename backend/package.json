@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "Polly cord backend",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -9,7 +9,7 @@
     "setup": "node setup/setup.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Vishal, Abhimanyu, Tyler,Neeloy, Abhishek",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.0",
