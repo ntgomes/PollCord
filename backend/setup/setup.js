@@ -38,7 +38,7 @@ connection
             `
                     )
                     .then(() => {
-                        console.log("DB creation scucesfull");
+                        console.log("DB creation succesfull");
                     });
             });
     });
