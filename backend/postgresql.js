@@ -1,12 +1,10 @@
-const pg =require("pg");
-require('dotenv').config()
-
+const pg = require("pg");
+require("dotenv").config();
 
 const { Pool } = pg;
 
- var test=()=>{
-    // NOTE: PostgreSQL creates a superuser by default on localhost using the OS username.
-
+var test = () => {
+    // NOTE: Ensure to have a .env file containg these.
     const pool = new Pool({
         user: process.env.POSTGRES_USER,
         database: process.env.POSTGRES_DATABASE_NAME,
@@ -14,14 +12,6 @@ const { Pool } = pg;
         host: process.env.POSTGRES_HOST,
         port: process.env.POSTGRES_PORT,
     });
-
-    // const pool = new Pool({
-    //     user: "postgres",
-    //     database: "postgres",
-    //     password: "Test@1234",
-    //     host: "127.0.0.1",
-    //     port: 5432,
-    // });
 
     const connection = {
         pool,
@@ -35,10 +25,7 @@ const { Pool } = pg;
         },
     };
 
-   
-
-   
-
     return connection;
 };
+
 module.exports = test;
