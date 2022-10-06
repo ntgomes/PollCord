@@ -7,7 +7,7 @@ const app = express();
 
 let bodyParser = require("body-parser");
 
-const port = process.env.APP_PORT;
+const port = process.env.APP_PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -15,15 +15,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/check/:guild_id/:poll_name", async (req, res) => {
-    // we need not put this in a try catch, because,
-    // the rows[0] would return false if the entry does not exist
+    
 
-    const poll_name = req.params.poll_name.replace(/'/g, "''");
+    const poll_name = req.query.poll_name.replace(/'/g, "''");
+    if(!poll_name||!req.query.guild_id){
+        res.status(500).json({"text": "Please provide all the required params"});
+        return;
+    }
 
     const rows = await postgresql().query(
         `
         select exists(select 1 from polls 
-        where guildId='${req.params.guild_id}' and pollName='${poll_name}');
+        where guildId='${req.query.guild_id}' and pollName='${poll_name}');
         `
     );
     res.status(200).json(rows[0]);
@@ -38,11 +41,9 @@ app.post("/save", async (req, res) => {
     let results = json_input["results"];
 
     // if these fields are empty, then return a failure
-    if (
-        guild_id == undefined ||
-        poll_name == undefined ||
-        results == undefined
-    ) {
+    if (!guild_id  ||
+        !poll_name  ||
+        !results) {
         res.status(200).json({ success: false });
         return;
     }
@@ -107,7 +108,7 @@ app.post("/save", async (req, res) => {
 
 app.get("/recall/:guild_id/:poll_name", async (req, res) => {
     var results = {};
-    const poll_name = req.params.poll_name.replace(/'/g, "''");
+    var poll_name = req.query.poll_name.replace(/'/g, "''");
 
     const rows = await postgresql().query(
         `
