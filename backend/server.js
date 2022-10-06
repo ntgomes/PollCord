@@ -141,12 +141,6 @@ app.get("/recall/:guild_id/:poll_name", async (req, res) => {
     res.status(200).send(json_output);
 });
 
-app.get("/", (req, res) => {
-    res.status(200).json({
-        ga: 1,
-    });
-});
-
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+    console.log(`App listening on port ${port}`);
 });
