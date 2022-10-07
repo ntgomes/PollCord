@@ -3,8 +3,8 @@ name: PollCord frontend
 
 on:
   push:
-    branches:
-      - '!gh-pages'
+    branches-ignore:
+      - gh-pages
 
 jobs:
   build:
