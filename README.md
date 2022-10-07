@@ -10,7 +10,7 @@
 
 
 # PollCord
-**Pollcord is a software created for Disocrd users to conduct Polls**
+**Pollcord is a software created for Discord users to conduct Polls**
 
 ### Purpose
 Discord is a social platform where users interact with each other. Creating Polls is a sophisticated way to ask questions, collect opinions especially with large number of users. However, Discord currently provides a basic functionality to create Polls. PollCord provides a comprehensive solution in conducting Polls. PollCord is built using NextCord, which is a cutting edge API wrapper for Discord, to create a modern interactive experience compared to most other Discord poll bots
@@ -20,7 +20,7 @@ Discord is a social platform where users interact with each other. Creating Poll
 
 - Easy & User Friendly Interface to create Polls
 - Create & Aggregate Multiple Polls onto a single poll
-- Collaborator Vs Creator Only Permissions
+- Creator Only Permissions
 - Upper limit of upto 25 options for each poll 
 - Comprehenive Database to store and Recall/ Extract Poll results whenever needed
 
