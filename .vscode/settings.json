@@ -5,6 +5,6 @@
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
     "python.linting.pylintArgs": [
-        "--disable=E0237,E0401,C0103,C0201" // Ignoring a few errors and conventions due to how Pycord works
+        "--disable=E0237,E0401,C0103,C0201,C0209" // Ignoring a few errors and conventions due to how Pycord works
     ]
 }

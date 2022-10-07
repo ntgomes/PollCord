@@ -38,7 +38,7 @@ class BackendClient:
           bool. True if poll exists; false otherwise
         """
         return self.session.get(
-            self.api_hostname + f"/check/{0}/{1}".format(guild_id, poll_name)
+            self.api_hostname + "/check/{0}/{1}".format(guild_id, poll_name)
         ).json()["exists"]
 
     def save_poll_results(self, guild_id: str, poll_name, result_data):
@@ -112,5 +112,5 @@ class BackendClient:
             }
         """
         return self.session.get(
-            self.api_hostname + f"/recall/{0}/{1}".format(guild_id, poll_name)
+            self.api_hostname + "/recall/{0}/{1}".format(guild_id, poll_name)
         ).json()
