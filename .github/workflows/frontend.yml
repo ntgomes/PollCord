@@ -50,7 +50,7 @@ jobs:
     - name: Build and Commit
       uses: sphinx-notes/pages@cache2
       with:
-        documentation_path: ./docs
+        documentation_path: ./docs/frontend/source
         requirements_path: ./frontend/requirements.txt
         sphinx_version: 5.2.3
     - name: Push changes
