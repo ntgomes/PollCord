@@ -1,5 +1,7 @@
 import discord
 from poll_commands.components.modals import MCPollModal, RemoveModal
+from api.api import BackendClient
+import json
 
 
 class MakerButtons(discord.ui.View):
@@ -10,11 +12,12 @@ class MakerButtons(discord.ui.View):
     :parameter question_dict: a dict key:(guild_id,poll_name) value:[MCQuestions]
     """
 
-    def __init__(self, poll_name: str, guild_id: int, maker: discord.User, *items):
+    def __init__(self, poll_name: str, guild_id: int, maker: discord.User, question_dict, *items):
         super().__init__(timeout=None, *items)
         self.poll_name = poll_name
-        self.question_dict = {(guild_id, poll_name): []}
+        self.question_dict = question_dict
         self.maker = maker
+        self.question_dict[(guild_id, self.poll_name)] = []
 
     @discord.ui.button(label="Add MC Question", row=0, style=discord.ButtonStyle.primary)
     async def mc_button_callback(self, button: discord.Button, interaction: discord.Interaction):
@@ -50,16 +53,29 @@ class MakerButtons(discord.ui.View):
                 embeds.append(v.as_embed(i))
             await interaction.response.edit_message(embeds=embeds)
 
+    @discord.ui.button(label="Cancel Creation", row=0, style=discord.ButtonStyle.primary)
+    async def cancel_button_callback(self, button: discord.Button, interaction: discord.Interaction):
+        del self.question_dict[(interaction.guild_id, self.poll_name)]
+        await interaction.response.send_message(content=f"Cancelled Creation of {self.poll_name}",
+                                                ephemeral=True)
+        await interaction.message.delete()
+
     @discord.ui.button(label="Finalize Poll", row=1, style=discord.ButtonStyle.green)
     async def finalize_button_callback(self, button: discord.Button, interaction: discord.Interaction):
         if interaction.user != self.maker:
             await interaction.response.send_message(content=f"You aren't that maker of this poll",
                                                     ephemeral=True)
+        elif len(self.question_dict[(interaction.guild_id, self.poll_name)]) == 0:
+            await interaction.response.send_message(content=f"You can't make an empty poll",
+                                                    ephemeral=True)
         else:
             await interaction.response.send_message(view=PollButtons(self.poll_name,
                                                                      interaction.guild_id,
-                                                                     question_dict=self.question_dict))
+                                                                     question_dict=self.question_dict),
+                                                    content=f"Poll: {self.poll_name}")
             await self.message.delete()
+
+
 
 
 class PollButtons(discord.ui.View):
@@ -87,7 +103,7 @@ class PollButtons(discord.ui.View):
 
     def as_selector_options(self):
         """
-        helper function to convert a list of quesiton into a [discord.SelectOption] for the Select ui element
+        helper function to convert a list of question into a [discord.SelectOption] for the Select ui element
         :return: [discord.SelectOption]
         """
         options = []
@@ -104,7 +120,8 @@ class PollButtons(discord.ui.View):
         answer_selector = discord.ui.Select(
             min_values=1,
             max_values=1,
-            options=self.as_selector_options()
+            options=self.as_selector_options(),
+            placeholder=self.question_dict[(self.guild_id, self.poll_name)][self.question_num].question
         )
 
         async def answer_select(interaction: discord.Interaction):
@@ -141,12 +158,24 @@ class PollButtons(discord.ui.View):
             self.results[question_list[self.question_num].question][self.answers[user]] += 1
 
         if self.question_num >= len(question_list) - 1:
-            embed = self.result_embeds()
-            await interaction.response.edit_message(embeds=embed, view=None)
+            embeds = self.result_embeds()
+            result_dict = {}
+            for index, question in enumerate(self.results.keys()):
+                result_dict[f"question{index + 1}"] = {}
+                result_dict[f"question{index + 1}"]["question_text"] = question
+                for option, value in self.results[question].items():
+                    result_dict[f"question{index + 1}"][option] = value
+
+            BackendClient().save_poll_results(guild_id=self.guild_id,
+                                              poll_name=self.poll_name,
+                                              result_data=result_dict)
+            await interaction.response.edit_message(embeds=embeds, view=None)
+
         else:
             # makes a new view since you can't update a currently existing view right now
             await interaction.response.edit_message(view=PollButtons(self.poll_name,
                                                                      self.guild_id,
                                                                      self.question_dict,
                                                                      self.results,
-                                                                     self.question_num + 1))
+                                                                     self.question_num + 1),
+                                                    content=f"Poll: {self.poll_name}")

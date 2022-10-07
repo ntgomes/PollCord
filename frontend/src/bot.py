@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 import discord
 import poll_commands.MakerCommands
+import poll_commands.RecallCommands
 
 
 def main():
@@ -24,9 +25,8 @@ def main():
 
         print(message.content)
 
-    print(dir(poll_commands))
-
     bot.add_cog(poll_commands.MakerCommands.MakerCommands(bot))
+    bot.add_cog(poll_commands.RecallCommands.RecallCommands(bot))
     bot.run(DISCORD_TOKEN)
 
 

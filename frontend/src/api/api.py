@@ -23,7 +23,7 @@ class BackendClient(object):
         name combination already exist in the backend. Returns true if so, false otherwise."""
         return self.session.get(self.api_hostname + "/check/{0}/{1}".format(guild_id, poll_name)).json()['exists']
 
-    def save_poll_results(self, guild_id, poll_name, result_data):
+    def save_poll_results(self, guild_id:str, poll_name, result_data):
         """
         Makes a POST request to /save endpoint with given guild ID and poll name, and poll result data
         so that it can be stored in the backend. Returns true if the backend successfully did so, false otherwise.
@@ -47,7 +47,7 @@ class BackendClient(object):
         """
         return self.session.post(
             self.api_hostname + "/save", 
-            json.dumps({"guild_id": guild_id, "poll_name": poll_name, "results": result_data})
+            json.dumps({"guild_id": str(guild_id), "poll_name": poll_name, "results": result_data})
         ).json()['success']
     
     def recall_poll(self, guild_id, poll_name):
