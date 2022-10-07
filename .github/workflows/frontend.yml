@@ -2,7 +2,8 @@
 name: PollCord frontend
 
 on:
-  [push]
+  push:
+    branches: [ntgomes/add-frontend-actions]
 
 jobs:
   build:
@@ -41,4 +42,20 @@ jobs:
       uses: codecov/codecov-action@v2
       with:
         fail_ci_if_error: true
+    - name: Cache
+      uses: actions/cache@v3
+      with:
+        path: /tmp/sphinxnotes-pages
+        key: ${{ runner.os }}-Sphinx-Github2
+    - name: Build and Commit
+      uses: sphinx-notes/pages@cache2
+      with:
+        documentation_path: ./docs
+        requirements_path: ./frontend/requirements.txt
+        sphinx_version: 5.2.3
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: gh-pages
  
