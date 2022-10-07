@@ -12,7 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@master
+      # Required by sphinx-notes@pages
+      fetch-depth: 0
     - name: Set up Python 3.10
       uses: actions/setup-python@v2
       with:
@@ -48,13 +50,13 @@ jobs:
       with:
         path: /tmp/sphinxnotes-pages
         key: ${{ runner.os }}-Sphinx-Github2
-    - name: Build and Commit
+    - name: Build and Commit Docs
       uses: sphinx-notes/pages@cache2
       with:
         documentation_path: ./docs/frontend/source
         requirements_path: ./frontend/requirements.txt
         sphinx_version: 5.2.3
-    - name: Push changes
+    - name: Push auto-generated doc changes to GitHub Pages branch
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
