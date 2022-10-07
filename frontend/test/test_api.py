@@ -10,12 +10,14 @@ class MockResponse:
     calls using python-mock. Includes all the functions that are called by api.py so that
     there isn't any TypeError for the mock return.
     """
-    def __init__(self, json_data, status_code = 200):
+
+    def __init__(self, json_data, status_code=200):
         self.json_data = json_data
 
     """
     Just returns the JSON body of the response... or the dict representation in Python.
     """
+
     def json(self):
         return self.json_data
 

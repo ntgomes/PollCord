@@ -5,6 +5,7 @@ class MCQuestion(object):
     """
     Class that represents a poll question, with the question text and the options themselves.
     """
+
     def __init__(self, question, options):
         """
         Constructor.
@@ -16,11 +17,11 @@ class MCQuestion(object):
         """
         Describes how the fields of this MCQuestion should be displayed onto a Discord UI
         as an embed.
-        
+
         Args:
           number: The ordinal number of the poll question
         Returns:
-          The Discord embed to display 
+          The Discord embed to display
         """
         embed = discord.Embed(title=f"Question {number} (Multiple Choice)")
         embed.add_field(name="Question", value=self.question)
@@ -30,11 +31,11 @@ class MCQuestion(object):
     def as_embed_with_votes(self, number):
         """
         Just like as_embed but includes the votes during a recall or finalize.
-        
+
         Args:
           number: The ordinal number of the poll question
         Returns:
-          The Discord embed to display 
+          The Discord embed to display
         """
         embed = discord.Embed(title=f"Question {number} (Multiple Choice)")
         embed.add_field(name="Question", value=self.question)
