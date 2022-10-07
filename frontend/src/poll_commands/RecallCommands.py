@@ -38,7 +38,7 @@ class RecallCommands(commands.Cog):
         """
         result = BackendClient().recall_poll(ctx.guild_id, poll_name)
         if result is None:
-            await ctx.send(content=f"There is no previous poll called {poll_name}")
+            await ctx.respond(content=f"There is no previous poll called {poll_name}")
         else:
             actual_results = result["results"]
             embeds = [discord.Embed(title=f"{poll_name}")]
@@ -50,4 +50,4 @@ class RecallCommands(commands.Cog):
                     else:
                         new_embed.add_field(name=key, value=str(option))
                 embeds.append(new_embed)
-            await ctx.send(embeds=embeds)
+            await ctx.respond(embeds=embeds)

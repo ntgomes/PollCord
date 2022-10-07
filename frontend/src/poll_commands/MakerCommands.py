@@ -42,9 +42,9 @@ class MakerCommands(commands.Cog):
         ) in self.question_dict.keys() or BackendClient().check_if_poll_exists(
             guild_id=ctx.guild_id, poll_name=poll_name
         ):
-            await ctx.send(content=f"{poll_name} already exists.")
+            await ctx.respond(content=f"{poll_name} already exists.")
         else:
-            await ctx.send(
+            await ctx.respond(
                 view=MakerButtons(
                     poll_name=poll_name,
                     guild_id=ctx.guild_id,
