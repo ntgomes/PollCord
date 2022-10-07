@@ -1,0 +1,31 @@
+cff-version: 1.1.0
+title: >-
+  PollCord: A discord Polling Bot
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Neeloy
+    family-names: Gomes
+    email: neeloy.gomes@gmail.com
+  - given-names: Vishal
+    family-names: Veerareddy
+    email: veerareddyvishal144@gmail.com
+  - given-names: Abhimanyu
+    family-names: Bellam
+    email: bellamabhimanyu@gmail.com
+  - given-names: Tyler
+    family-names: Craine
+    email: tylerkecraine@gmail.com
+  - given-names: Abhishek
+    family-names: Gupta
+    email: guptabhishek785@gmail.com
+identifiers:
+  - type: url
+    value: 'https://doi.org/10.5281/zenodo.7158367'
+url: 'https://github.com/ntgomes/PollCord'
+abstract: >-
+  Pollcord is a software created for Discord users to conduct polls, providing a comprehensive solution in conducting polls. PollCord is built using Pycord, which is a cutting edge API wrapper for Discord, to create a modern interactive experience compared to most other Discord poll bots
+license: MIT
+version: 1.0.0
