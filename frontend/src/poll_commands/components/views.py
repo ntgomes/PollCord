@@ -1,18 +1,27 @@
+"""
+This module contains the logic for the different custom buttons that are used in PollCord.
+Each of these buttons are treated as views in Pycord.
+"""
+
 import discord
 from poll_commands.components.modals import MCPollModal, RemoveModal
 from api.api import BackendClient
-import json
 
 
 class MakerButtons(discord.ui.View):
     """
     Main view used for authoring new polls. Currently, only responds to maker of the poll.
-    :parameter poll_name: name of the poll
-    :parameter guild_id: the guild id of where of poll is
-    :parameter question_dict: a dict key:(guild_id,poll_name) value:[MCQuestions]
+
+    Args:
+      poll_name: name of the poll
+      guild_id: the guild id of where of poll is
+      question_dict: a dict key:(guild_id,poll_name) value:[MCQuestions]
     """
 
     def __init__(self, poll_name: str, guild_id: int, maker: discord.User, question_dict, *items):
+        """
+        Constructor. Mostly for initial setters.
+        """
         super().__init__(timeout=None, *items)
         self.poll_name = poll_name
         self.question_dict = question_dict
@@ -21,6 +30,9 @@ class MakerButtons(discord.ui.View):
 
     @discord.ui.button(label="Add MC Question", row=0, style=discord.ButtonStyle.primary)
     async def mc_button_callback(self, button: discord.Button, interaction: discord.Interaction):
+        """
+        Button for adding a new poll question.
+        """
         if interaction.user != self.maker:
             await interaction.response.send_message(content=f"You aren't that maker of this poll",
                                                     ephemeral=True)
@@ -32,6 +44,9 @@ class MakerButtons(discord.ui.View):
 
     @discord.ui.button(label="Remove Question", row=0, style=discord.ButtonStyle.danger)
     async def remove_button_callback(self, button: discord.Button, interaction: discord.Interaction):
+        """
+        Button for removing a poll question.
+        """
         if interaction.user != self.maker:
             await interaction.response.send_message(content=f"You aren't that maker of this poll",
                                                     ephemeral=True)
@@ -43,6 +58,9 @@ class MakerButtons(discord.ui.View):
 
     @discord.ui.button(label="List Questions", row=0, style=discord.ButtonStyle.primary)
     async def list_button_callback(self, button: discord.Button, interaction: discord.Interaction):
+        """
+        Button for listing all the currently made questions in a poll.
+        """
         if interaction.user != self.maker:
             await interaction.response.send_message(content=f"You aren't that maker of this poll",
                                                     ephemeral=True)
@@ -55,6 +73,9 @@ class MakerButtons(discord.ui.View):
 
     @discord.ui.button(label="Cancel Creation", row=0, style=discord.ButtonStyle.primary)
     async def cancel_button_callback(self, button: discord.Button, interaction: discord.Interaction):
+        """
+        Button for cancelling the creation of a poll.
+        """
         del self.question_dict[(interaction.guild_id, self.poll_name)]
         await interaction.response.send_message(content=f"Cancelled Creation of {self.poll_name}",
                                                 ephemeral=True)
@@ -62,6 +83,9 @@ class MakerButtons(discord.ui.View):
 
     @discord.ui.button(label="Finalize Poll", row=1, style=discord.ButtonStyle.green)
     async def finalize_button_callback(self, button: discord.Button, interaction: discord.Interaction):
+        """
+        Button for finalizing the poll and collecting/storing the results of the poll.
+        """
         if interaction.user != self.maker:
             await interaction.response.send_message(content=f"You aren't that maker of this poll",
                                                     ephemeral=True)
@@ -79,16 +103,20 @@ class MakerButtons(discord.ui.View):
 
 
 class PollButtons(discord.ui.View):
+    """
+    A view responsible for taking input from an ongoing poll, storing the results, and writing them to the api.
+    
+    Args:
+      poll_name: poll_name
+      guild_id: the current guild the poll is happening
+      question_dict: question_dict with all the current questions
+      result: passed in from previous views to make up for the fact you can't update views
+      question_num: current question number
+    """
     def __init__(self, poll_name, guild_id, question_dict, result=None, question_num=0):
         """
-        a view responsible for taking input from an ongoing poll, storing the results, and writing them to the api.
-        :param poll_name: poll_name
-        :param guild_id: the current guild the poll is happening
-        :param question_dict: question_dict with all the current questions
-        :param result: passed in from previous views to make up for the fact you can't update views
-        :param question_num: current question number
+        Constructors. Mostly for initial setters.
         """
-
         super().__init__(timeout=None)
         if result is None:
             result = {}
@@ -103,8 +131,10 @@ class PollButtons(discord.ui.View):
 
     def as_selector_options(self):
         """
-        helper function to convert a list of question into a [discord.SelectOption] for the Select ui element
-        :return: [discord.SelectOption]
+        Helper function to convert a list of question into a [discord.SelectOption] for the Select ui element
+        
+        Returns: 
+          [discord.SelectOption]
         """
         options = []
         answers = self.question_dict[(self.guild_id, self.poll_name)][self.question_num].options.split(",")
@@ -114,8 +144,10 @@ class PollButtons(discord.ui.View):
 
     def make_select(self):
         """
-        dynamically makes a select from the current question being polled
-        :return: discord.Select representing the options for the current question
+        Dynamically makes a select from the current question being polled
+       
+        Returns:
+          discord.Select representing the options for the current question
         """
         answer_selector = discord.ui.Select(
             min_values=1,
@@ -135,8 +167,10 @@ class PollButtons(discord.ui.View):
 
     def result_embeds(self):
         """
-        basic function to format the results of a poll into embeds for display at the end of a poll.
-        :return: list of discord.Embed objects
+        Basic function to format the results of a poll into embeds for display at the end of a poll.
+        
+        Returns:
+          list of discord.Embed objects
         """
         finish_embed = discord.Embed(title=f"Poll Finish({self.poll_name})")
         embeds = [finish_embed]
@@ -149,6 +183,16 @@ class PollButtons(discord.ui.View):
 
     @discord.ui.button(label="Next Question", row=1, style=discord.ButtonStyle.primary)
     async def next_button_callback(self, button: discord.Button, interaction: discord.interactions):
+        """
+        Function that determines what the next question should be after the user answers a previous
+        poll question.
+
+        Args:
+          button: Represents the button for linking the callback
+          interaction: User interaction object to trigger the callback 
+        Returns:
+          None
+        """
         question_list = self.question_dict[(self.guild_id, self.poll_name)]
         self.results[question_list[self.question_num].question] = {}
         for i in question_list[self.question_num].options.split(","):
