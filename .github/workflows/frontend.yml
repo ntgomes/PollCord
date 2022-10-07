@@ -1,0 +1,65 @@
+
+name: PollCord frontend
+
+on:
+  push:
+    branches-ignore:
+      - gh-pages
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+      # Required by sphinx-notes@pages
+      with:
+        fetch-depth: 0
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.10"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r frontend/requirements.txt
+        pip install flake8
+    - name: Lint with flake8
+      run: |
+        cd frontend
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        flake8 . --count --exit-zero --ignore=F541 --max-complexity=10 --max-line-length=127 --statistics
+    - name: Test with pytest
+      run: |
+        cd frontend
+        export API_HOSTNAME=http://testhost:8080
+        pytest
+    - name: Generate coverage
+      run: |
+        cd frontend
+        export API_HOSTNAME=http://testhost:8080
+        pytest --cov=./ --cov-report=xml
+    - name: "Upload coverage to Codecov"
+      uses: codecov/codecov-action@v2
+      with:
+        fail_ci_if_error: true
+    - name: Cache
+      uses: actions/cache@v3
+      with:
+        path: /tmp/sphinxnotes-pages
+        key: ${{ runner.os }}-Sphinx-Github2
+    - name: Build and Commit Docs
+      uses: sphinx-notes/pages@cache2
+      with:
+        documentation_path: ./docs/frontend/source
+        requirements_path: ./frontend/requirements.txt
+        sphinx_version: 5.2.3
+    - name: Push auto-generated doc changes to GitHub Pages branch
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: gh-pages
+ 
