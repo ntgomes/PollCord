@@ -3,7 +3,8 @@ name: PollCord frontend
 
 on:
   push:
-    branches: [ntgomes/add-frontend-actions]
+    branches:
+      - '!gh-pages'
 
 jobs:
   build:
