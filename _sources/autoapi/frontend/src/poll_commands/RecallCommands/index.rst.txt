@@ -1,0 +1,49 @@
+:py:mod:`frontend.src.poll_commands.RecallCommands`
+===================================================
+
+.. py:module:: frontend.src.poll_commands.RecallCommands
+
+.. autoapi-nested-parse::
+
+   Contains the cog implementation for recalling an archived poll.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   frontend.src.poll_commands.RecallCommands.RecallCommands
+
+
+
+
+.. py:class:: RecallCommands(bot)
+
+   Bases: :py:obj:`discord.ext.commands.Cog`
+
+   Class that represents the cog for handling the /recallpoll command for the bot.
+
+   Args:
+     bot: The Discord bot to link the cog to
+
+   .. py:attribute:: ctx_parse
+      
+
+      
+
+   .. py:method:: recall_poll(ctx: ctx_parse, poll_name: str)
+      :async:
+
+      Function to handle the input of the /recallpoll command from the user.
+
+      Args:
+        ctx: The Discord application context for the bot to send messages with.
+        poll_name: The name of the poll you want to recall
+
+
+

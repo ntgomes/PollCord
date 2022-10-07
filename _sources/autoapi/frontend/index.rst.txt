@@ -1,0 +1,16 @@
+:py:mod:`frontend`
+==================
+
+.. py:module:: frontend
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   src/index.rst
+   test/index.rst
+
+

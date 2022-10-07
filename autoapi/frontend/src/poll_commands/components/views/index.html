@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>frontend.src.poll_commands.components.views &#8212; PollCord  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/graphviz.css" />
+    <script data-url_root="../../../../../../" id="documentation_options" src="../../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../../_static/jquery.js"></script>
+    <script src="../../../../../../_static/underscore.js"></script>
+    <script src="../../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../../../../_static/doctools.js"></script>
+    <script src="../../../../../../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-frontend.src.poll_commands.components.views">
+<span id="frontend-src-poll-commands-components-views"></span><h1><a class="reference internal" href="#module-frontend.src.poll_commands.components.views" title="frontend.src.poll_commands.components.views"><code class="xref py py-mod docutils literal notranslate"><span class="pre">frontend.src.poll_commands.components.views</span></code></a><a class="headerlink" href="#module-frontend.src.poll_commands.components.views" title="Permalink to this heading">¶</a></h1>
+<p>This module contains the logic for the different custom buttons that are used in PollCord.
+Each of these buttons are treated as views in Pycord.</p>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading">¶</a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading">¶</a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#frontend.src.poll_commands.components.views.MakerButtons" title="frontend.src.poll_commands.components.views.MakerButtons"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MakerButtons</span></code></a></p></td>
+<td><p>Main view used for authoring new polls. Currently, only responds to maker of the poll.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#frontend.src.poll_commands.components.views.PollButtons" title="frontend.src.poll_commands.components.views.PollButtons"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PollButtons</span></code></a></p></td>
+<td><p>A view responsible for taking input from an ongoing poll, storing the results, and writing them to the api.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="frontend.src.poll_commands.components.views.MakerButtons">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">frontend.src.poll_commands.components.views.</span></span><span class="sig-name descname"><span class="pre">MakerButtons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">poll_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guild_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">discord.User</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_dict</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">items</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#frontend.src.poll_commands.components.views.MakerButtons" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">discord.ui.View</span></code></p>
+<p>Main view used for authoring new polls. Currently, only responds to maker of the poll.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>poll_name: name of the poll
+guild_id: the guild id of where of poll is
+question_dict: a dict key:(guild_id,poll_name) value:[MCQuestions]</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="frontend.src.poll_commands.components.views.MakerButtons.mc_button_callback">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mc_button_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">button</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">discord.Button</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">discord.Interaction</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#frontend.src.poll_commands.components.views.MakerButtons.mc_button_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Button for adding a new poll question.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="frontend.src.poll_commands.components.views.MakerButtons.remove_button_callback">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">remove_button_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">button</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">discord.Button</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">discord.Interaction</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#frontend.src.poll_commands.components.views.MakerButtons.remove_button_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Button for removing a poll question.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="frontend.src.poll_commands.components.views.MakerButtons.list_button_callback">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">list_button_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">button</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">discord.Button</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">discord.Interaction</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#frontend.src.poll_commands.components.views.MakerButtons.list_button_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Button for listing all the currently made questions in a poll.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="frontend.src.poll_commands.components.views.MakerButtons.cancel_button_callback">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cancel_button_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">button</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">discord.Button</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">discord.Interaction</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#frontend.src.poll_commands.components.views.MakerButtons.cancel_button_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Button for cancelling the creation of a poll.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="frontend.src.poll_commands.components.views.MakerButtons.finalize_button_callback">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">finalize_button_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">button</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">discord.Button</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">discord.Interaction</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#frontend.src.poll_commands.components.views.MakerButtons.finalize_button_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Button for finalizing the poll and collecting/storing the results of the poll.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="frontend.src.poll_commands.components.views.PollButtons">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">frontend.src.poll_commands.components.views.</span></span><span class="sig-name descname"><span class="pre">PollButtons</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">poll_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">guild_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">question_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#frontend.src.poll_commands.components.views.PollButtons" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">discord.ui.View</span></code></p>
+<p>A view responsible for taking input from an ongoing poll, storing the results, and writing them to the api.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>poll_name: poll_name
+guild_id: the current guild the poll is happening
+question_dict: question_dict with all the current questions
+result: passed in from previous views to make up for the fact you can’t update views
+question_num: current question number</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="frontend.src.poll_commands.components.views.PollButtons.as_selector_options">
+<span class="sig-name descname"><span class="pre">as_selector_options</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontend.src.poll_commands.components.views.PollButtons.as_selector_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to convert a list of question into a [discord.SelectOption] for the Select ui element</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>[discord.SelectOption]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="frontend.src.poll_commands.components.views.PollButtons.make_select">
+<span class="sig-name descname"><span class="pre">make_select</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontend.src.poll_commands.components.views.PollButtons.make_select" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamically makes a select from the current question being polled</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>discord.Select representing the options for the current question</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="frontend.src.poll_commands.components.views.PollButtons.result_embeds">
+<span class="sig-name descname"><span class="pre">result_embeds</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#frontend.src.poll_commands.components.views.PollButtons.result_embeds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Basic function to format the results of a poll into embeds for display at the end of a poll.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>list of discord.Embed objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="frontend.src.poll_commands.components.views.PollButtons.next_button_callback">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">next_button_callback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">button</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">discord.Button</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interaction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">discord.interactions</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#frontend.src.poll_commands.components.views.PollButtons.next_button_callback" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function that determines what the next question should be after the user answers a previous
+poll question.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>button: Represents the button for linking the callback
+interaction: User interaction object to trigger the callback</p>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../../../index.html">PollCord</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../index.html">API Reference</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Neeloy Gomes, Tyler Craine, Abhishek Gupta, Abhimanyu Bellam, Vishal Veera Reddy.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../../../../_sources/autoapi/frontend/src/poll_commands/components/views/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

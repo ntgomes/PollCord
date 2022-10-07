@@ -1,0 +1,62 @@
+:py:mod:`frontend.src.poll_commands.components.modals`
+======================================================
+
+.. py:module:: frontend.src.poll_commands.components.modals
+
+.. autoapi-nested-parse::
+
+   This module contains all the modals (pop-ups) used for managing questions on a poll.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   frontend.src.poll_commands.components.modals.MCPollModal
+   frontend.src.poll_commands.components.modals.RemoveModal
+
+
+
+
+.. py:class:: MCPollModal(*children: discord.ui.InputText, title: str)
+
+   Bases: :py:obj:`discord.ui.Modal`
+
+   Class for representing the modal used for creating a new question to a poll,
+   with a set of comma-separated options.
+
+   .. py:method:: callback(interaction: discord.Interaction)
+      :async:
+
+      Callback function whenever the user submits their input for the modal
+      for creating the poll question. Does some validation of the option field
+      before embedding the question into the poll.
+
+      Args:
+        interaction: The submission interaction from the user
+
+
+
+.. py:class:: RemoveModal(*children: discord.ui.InputText, title: str, question_list)
+
+   Bases: :py:obj:`discord.ui.Modal`
+
+   Class for representing the modal used for deleting a question from the poll.
+
+   .. py:method:: callback(interaction: discord.Interaction)
+      :async:
+
+      Callback for when the user submits their input for the modal. Removes the question from
+      the poll if it was there and states it was successful in doing so, but reports back
+      stating otherwise.
+
+      Args:
+        interaction: The submission interaction from the user
+
+
+

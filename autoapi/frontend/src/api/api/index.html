@@ -1,0 +1,223 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>frontend.src.api.api &#8212; PollCord  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css" />
+    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-frontend.src.api.api">
+<span id="frontend-src-api-api"></span><h1><a class="reference internal" href="#module-frontend.src.api.api" title="frontend.src.api.api"><code class="xref py py-mod docutils literal notranslate"><span class="pre">frontend.src.api.api</span></code></a><a class="headerlink" href="#module-frontend.src.api.api" title="Permalink to this heading">¶</a></h1>
+<p>This module contains all functions needed to call the backend client
+for PollCord to save and fetch polls.</p>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading">¶</a></h2>
+<section id="classes">
+<h3>Classes<a class="headerlink" href="#classes" title="Permalink to this heading">¶</a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#frontend.src.api.api.BackendClient" title="frontend.src.api.api.BackendClient"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BackendClient</span></code></a></p></td>
+<td><p>Client class that be used to make HTTP calls to the backend to save</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="frontend.src.api.api.BackendClient">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">frontend.src.api.api.</span></span><span class="sig-name descname"><span class="pre">BackendClient</span></span><a class="headerlink" href="#frontend.src.api.api.BackendClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>Client class that be used to make HTTP calls to the backend to save
+and fetch poll information for PollCord.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="frontend.src.api.api.BackendClient.check_if_poll_exists">
+<span class="sig-name descname"><span class="pre">check_if_poll_exists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">guild_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poll_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#frontend.src.api.api.BackendClient.check_if_poll_exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a GET request to /check/&lt;guild_id&gt;/&lt;poll_name&gt; endpoint to see if the
+given guild ID and poll name combination already exist in the backend.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>guild_id:  The guild ID to check the existence for
+poll_name: The poll_name to be used to check existence</p>
+</dd>
+<dt>Returns:</dt><dd><p>bool. True if poll exists; false otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="frontend.src.api.api.BackendClient.save_poll_results">
+<span class="sig-name descname"><span class="pre">save_poll_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">guild_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poll_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#frontend.src.api.api.BackendClient.save_poll_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a POST request to /save endpoint with given guild ID and poll name,
+and poll result data so that it can be stored in the backend.</p>
+<dl>
+<dt>Args:</dt><dd><p>guild_id:  The guild ID that is associated with the poll
+poll_name: The poll name that should be saved
+result_data: Poll data that should saved; should be in this dict format:</p>
+<blockquote>
+<div><dl>
+<dt>{</dt><dd><dl class="simple">
+<dt>“question1”: {</dt><dd><p>“question_text”: “Maybe the beach today?”,
+“option1”: 23,
+“option2”: 19,
+“option3”: 10,
+…</p>
+</dd>
+</dl>
+<p>},
+“question2”: {</p>
+<blockquote>
+<div><p>“question_text”: “How is the course going?”,
+“option1”: 20,
+“option2”: 10,
+…</p>
+</div></blockquote>
+</dd>
+</dl>
+<p>}</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><p>bool. True if saved successfully; false otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="frontend.src.api.api.BackendClient.recall_poll">
+<span class="sig-name descname"><span class="pre">recall_poll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">guild_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">poll_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#frontend.src.api.api.BackendClient.recall_poll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a GET request to /recall/&lt;guild_id&gt;/&lt;poll_name&gt; endpoint to see
+if the given guild ID and pollname combination already exist in the backend.</p>
+<dl>
+<dt>Args:</dt><dd><p>guild_id:  The guild ID that is associated with the poll
+poll_name: The poll name that should be recalled</p>
+</dd>
+<dt>Returns:</dt><dd><dl>
+<dt>dict: Returns the poll information if so, and None otherwise. Looks like the following:</dt><dd><dl>
+<dt>{</dt><dd><p>“guild_id”: 12345,
+“pool_name”: “MY POLL”,
+“results”:{</p>
+<blockquote>
+<div><dl class="simple">
+<dt>“question1”: {</dt><dd><p>“question_text”: “Maybe the beach today?”,
+“option1”: 23,
+“option2”: 19,
+“option3”: 10,
+…</p>
+</dd>
+</dl>
+<p>},
+“question2”: {</p>
+<blockquote>
+<div><p>“question_text”: “How is the course going?”,
+“option1”: 20,
+“option2”: 10,
+…</p>
+</div></blockquote>
+</div></blockquote>
+<p>}</p>
+</dd>
+</dl>
+<p>}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../../index.html">PollCord</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../index.html">API Reference</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Neeloy Gomes, Tyler Craine, Abhishek Gupta, Abhimanyu Bellam, Vishal Veera Reddy.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.2.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../../../_sources/autoapi/frontend/src/api/api/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

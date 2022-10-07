@@ -1,0 +1,47 @@
+:py:mod:`frontend.src.poll_commands.components.questions`
+=========================================================
+
+.. py:module:: frontend.src.poll_commands.components.questions
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   frontend.src.poll_commands.components.questions.MCQuestion
+
+
+
+
+.. py:class:: MCQuestion(question, options)
+
+   Bases: :py:obj:`object`
+
+   Class that represents a poll question, with the question text and the options themselves.
+
+   .. py:method:: as_embed(number)
+
+      Describes how the fields of this MCQuestion should be displayed onto a Discord UI
+      as an embed.
+
+      Args:
+        number: The ordinal number of the poll question
+      Returns:
+        The Discord embed to display
+
+
+   .. py:method:: as_embed_with_votes(number)
+
+      Just like as_embed but includes the votes during a recall or finalize.
+
+      Args:
+        number: The ordinal number of the poll question
+      Returns:
+        The Discord embed to display
+
+
+

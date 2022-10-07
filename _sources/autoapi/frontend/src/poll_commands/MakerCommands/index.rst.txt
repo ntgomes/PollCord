@@ -1,0 +1,49 @@
+:py:mod:`frontend.src.poll_commands.MakerCommands`
+==================================================
+
+.. py:module:: frontend.src.poll_commands.MakerCommands
+
+.. autoapi-nested-parse::
+
+   Contains the cog implementation for creating a new poll.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   frontend.src.poll_commands.MakerCommands.MakerCommands
+
+
+
+
+.. py:class:: MakerCommands(bot: discord.Bot)
+
+   Bases: :py:obj:`discord.ext.commands.Cog`
+
+   Class that represents the cog for handling the /makepoll command for the bot.
+
+   Args:
+     bot: The Discord bot to link the cog to
+
+   .. py:attribute:: ctx_parse
+      
+
+      
+
+   .. py:method:: make_poll(ctx: ctx_parse, poll_name: str)
+      :async:
+
+      Function to handle the input of the /makepoll command from the user.
+
+      Args:
+        ctx: The Discord application context for the bot to send messages with.
+        poll_name: The name of the poll you want to create
+
+
+

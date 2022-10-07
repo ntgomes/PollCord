@@ -1,0 +1,17 @@
+:py:mod:`frontend.src.poll_commands.components`
+===============================================
+
+.. py:module:: frontend.src.poll_commands.components
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   modals/index.rst
+   questions/index.rst
+   views/index.rst
+
+

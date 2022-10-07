@@ -1,0 +1,54 @@
+:py:mod:`frontend.test.test_api`
+================================
+
+.. py:module:: frontend.test.test_api
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   frontend.test.test_api.MockResponse
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   frontend.test.test_api.test_check_if_poll_exists
+   frontend.test.test_api.test_recall_poll
+   frontend.test.test_api.test_save_poll_results
+
+
+
+.. py:class:: MockResponse(json_data, status_code=200)
+
+   Class that is used as a fake requests.Response object for the purposes of mocking HTTP
+   calls using python-mock. Includes all the functions that are called by api.py so that
+   there isn't any TypeError for the mock return.
+
+   .. py:method:: json()
+
+
+
+.. py:function:: test_check_if_poll_exists(mock_get)
+
+   Given a GET request to /check/<guild_id>/<poll_name>, return and verify the mock JSON
+
+
+.. py:function:: test_recall_poll(mock_get)
+
+   Given a GET request to /recall/<guild_id>/<poll_name>, return and verify the mock JSON
+
+
+.. py:function:: test_save_poll_results(mock_get)
+
+   Given a POST request to /save, return and verify the mock JSON
+
+

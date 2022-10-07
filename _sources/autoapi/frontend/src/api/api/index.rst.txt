@@ -1,0 +1,104 @@
+:py:mod:`frontend.src.api.api`
+==============================
+
+.. py:module:: frontend.src.api.api
+
+.. autoapi-nested-parse::
+
+   This module contains all functions needed to call the backend client
+   for PollCord to save and fetch polls.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   frontend.src.api.api.BackendClient
+
+
+
+
+.. py:class:: BackendClient
+
+   Client class that be used to make HTTP calls to the backend to save
+   and fetch poll information for PollCord.
+
+   .. py:method:: check_if_poll_exists(guild_id, poll_name)
+
+      Makes a GET request to /check/<guild_id>/<poll_name> endpoint to see if the
+      given guild ID and poll name combination already exist in the backend.
+
+      Args:
+        guild_id:  The guild ID to check the existence for
+        poll_name: The poll_name to be used to check existence
+      Returns:
+        bool. True if poll exists; false otherwise
+
+
+   .. py:method:: save_poll_results(guild_id: str, poll_name, result_data)
+
+      Makes a POST request to /save endpoint with given guild ID and poll name,
+      and poll result data so that it can be stored in the backend.
+
+      Args:
+        guild_id:  The guild ID that is associated with the poll
+        poll_name: The poll name that should be saved
+        result_data: Poll data that should saved; should be in this dict format:
+          {
+              "question1": {
+                  "question_text": "Maybe the beach today?",
+                  "option1": 23,
+                  "option2": 19,
+                  "option3": 10,
+                  ...
+              },
+              "question2": {
+                  "question_text": "How is the course going?",
+                  "option1": 20,
+                  "option2": 10,
+                  ...
+              },
+              ...
+          }
+      Returns:
+        bool. True if saved successfully; false otherwise
+
+
+   .. py:method:: recall_poll(guild_id, poll_name)
+
+      Makes a GET request to /recall/<guild_id>/<poll_name> endpoint to see
+      if the given guild ID and pollname combination already exist in the backend.
+
+      Args:
+        guild_id:  The guild ID that is associated with the poll
+        poll_name: The poll name that should be recalled
+      Returns:
+        dict: Returns the poll information if so, and None otherwise. Looks like the following:
+          {
+              "guild_id": 12345,
+              "pool_name": "MY POLL",
+              "results":{
+                  "question1": {
+                      "question_text": "Maybe the beach today?",
+                      "option1": 23,
+                      "option2": 19,
+                      "option3": 10,
+                      ...
+                  },
+                  "question2": {
+                      "question_text": "How is the course going?",
+                      "option1": 20,
+                      "option2": 10,
+                      ...
+                  },
+                  ...
+              }
+          }
+
+
+

@@ -1,0 +1,30 @@
+:py:mod:`frontend.src.bot`
+==========================
+
+.. py:module:: frontend.src.bot
+
+.. autoapi-nested-parse::
+
+   Contains the main entrypoint for the frontend side of PollCord.
+
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   frontend.src.bot.main
+
+
+
+.. py:function:: main()
+
+   Main entrypoint for the frontend. Relies on the TOKEN field from .env file.
+   Initializes the Discord bot and adds the necessary cogs to it.
+
+

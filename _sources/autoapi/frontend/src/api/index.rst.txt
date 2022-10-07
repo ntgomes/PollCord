@@ -1,0 +1,15 @@
+:py:mod:`frontend.src.api`
+==========================
+
+.. py:module:: frontend.src.api
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   api/index.rst
+
+

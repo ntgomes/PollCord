@@ -1,0 +1,119 @@
+:py:mod:`frontend.src.poll_commands.components.views`
+=====================================================
+
+.. py:module:: frontend.src.poll_commands.components.views
+
+.. autoapi-nested-parse::
+
+   This module contains the logic for the different custom buttons that are used in PollCord.
+   Each of these buttons are treated as views in Pycord.
+
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   frontend.src.poll_commands.components.views.MakerButtons
+   frontend.src.poll_commands.components.views.PollButtons
+
+
+
+
+.. py:class:: MakerButtons(poll_name: str, guild_id: int, maker: discord.User, question_dict, *items)
+
+   Bases: :py:obj:`discord.ui.View`
+
+   Main view used for authoring new polls. Currently, only responds to maker of the poll.
+
+   Args:
+     poll_name: name of the poll
+     guild_id: the guild id of where of poll is
+     question_dict: a dict key:(guild_id,poll_name) value:[MCQuestions]
+
+   .. py:method:: mc_button_callback(button: discord.Button, interaction: discord.Interaction)
+      :async:
+
+      Button for adding a new poll question.
+
+
+   .. py:method:: remove_button_callback(button: discord.Button, interaction: discord.Interaction)
+      :async:
+
+      Button for removing a poll question.
+
+
+   .. py:method:: list_button_callback(button: discord.Button, interaction: discord.Interaction)
+      :async:
+
+      Button for listing all the currently made questions in a poll.
+
+
+   .. py:method:: cancel_button_callback(button: discord.Button, interaction: discord.Interaction)
+      :async:
+
+      Button for cancelling the creation of a poll.
+
+
+   .. py:method:: finalize_button_callback(button: discord.Button, interaction: discord.Interaction)
+      :async:
+
+      Button for finalizing the poll and collecting/storing the results of the poll.
+
+
+
+.. py:class:: PollButtons(poll_name, guild_id, question_dict, result=None, question_num=0)
+
+   Bases: :py:obj:`discord.ui.View`
+
+   A view responsible for taking input from an ongoing poll, storing the results, and writing them to the api.
+
+   Args:
+     poll_name: poll_name
+     guild_id: the current guild the poll is happening
+     question_dict: question_dict with all the current questions
+     result: passed in from previous views to make up for the fact you can't update views
+     question_num: current question number
+
+   .. py:method:: as_selector_options()
+
+      Helper function to convert a list of question into a [discord.SelectOption] for the Select ui element
+
+      Returns:
+        [discord.SelectOption]
+
+
+   .. py:method:: make_select()
+
+      Dynamically makes a select from the current question being polled
+
+      Returns:
+        discord.Select representing the options for the current question
+
+
+   .. py:method:: result_embeds()
+
+      Basic function to format the results of a poll into embeds for display at the end of a poll.
+
+      Returns:
+        list of discord.Embed objects
+
+
+   .. py:method:: next_button_callback(button: discord.Button, interaction: discord.interactions)
+      :async:
+
+      Function that determines what the next question should be after the user answers a previous
+      poll question.
+
+      Args:
+        button: Represents the button for linking the callback
+        interaction: User interaction object to trigger the callback
+      Returns:
+        None
+
+
+

@@ -1,0 +1,25 @@
+:py:mod:`frontend.src`
+======================
+
+.. py:module:: frontend.src
+
+
+Subpackages
+-----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 3
+
+   api/index.rst
+   poll_commands/index.rst
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   bot/index.rst
+
+
