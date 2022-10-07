@@ -30,10 +30,12 @@ jobs:
     - name: Test with pytest
       run: |
         cd frontend
+        export API_HOSTNAME=http://testhost:8080
         pytest
     - name: Generate coverage
       run: |
         cd frontend
+        export API_HOSTNAME=http://testhost:8080
         pytest --cov=./ --cov-report=xml
     - name: "Upload coverage to Codecov"
       uses: codecov/codecov-action@v2
