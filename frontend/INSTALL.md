@@ -18,6 +18,7 @@ git clone https://github.com/ntgomes/PollCord.git
 2. Checkout to the Pollcord directory
 ```
 cd PollCord 
+cd frontend
 ```
 
 3. Start a terminal/ Command prompt session to install the required dependencies
@@ -29,7 +30,7 @@ pip install -r requirements.txt
 
 5. Run the python file
 ```
-run main.py
+run bot.py
 ```
 
 

@@ -17,8 +17,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/check/:guild_id/:poll_name", async (req, res) => {
     
 
-    const poll_name = req.query.poll_name.replace(/'/g, "''");
-    if(!poll_name||!req.query.guild_id){
+    const poll_name = req.params.poll_name.replace(/'/g, "''");
+    if(!poll_name||!req.params.guild_id){
         res.status(500).json({"text": "Please provide all the required params"});
         return;
     }
@@ -26,7 +26,7 @@ app.get("/check/:guild_id/:poll_name", async (req, res) => {
     const rows = await postgresql().query(
         `
         select exists(select 1 from polls 
-        where guildId='${req.query.guild_id}' and pollName='${poll_name}');
+        where guildId='${req.params.guild_id}' and pollName='${poll_name}');
         `
     );
     res.status(200).json(rows[0]);
@@ -108,7 +108,7 @@ app.post("/save", async (req, res) => {
 
 app.get("/recall/:guild_id/:poll_name", async (req, res) => {
     var results = {};
-    var poll_name = req.query.poll_name.replace(/'/g, "''");
+    var poll_name = req.params.poll_name.replace(/'/g, "''");
 
     const rows = await postgresql().query(
         `
