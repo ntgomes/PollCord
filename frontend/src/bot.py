@@ -1,3 +1,7 @@
+"""
+Contains the main entrypoint for the frontend side of PollCord.
+"""
+
 import os
 from dotenv import load_dotenv
 import discord
@@ -11,7 +15,7 @@ def main():
     Initializes the Discord bot and adds the necessary cogs to it.
     """
     load_dotenv()
-    DISCORD_TOKEN = os.getenv('TOKEN')
+    DISCORD_TOKEN = os.getenv("TOKEN")
 
     intents = discord.Intents.default()
     intents.message_content = True
@@ -23,7 +27,7 @@ def main():
         """
         Callback function used by Pycord for when the bot is ready to use in Discord.
         """
-        print(f'We have logged in as {bot.user}')
+        print(f"We have logged in as {bot.user}")
 
     @bot.event
     async def on_message(message):
@@ -40,5 +44,5 @@ def main():
     bot.run(DISCORD_TOKEN)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

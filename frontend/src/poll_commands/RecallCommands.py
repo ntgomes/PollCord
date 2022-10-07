@@ -1,6 +1,11 @@
+"""
+Contains the cog implementation for recalling an archived poll.
+"""
+
 import discord
 from discord.ext import commands
 from api.api import BackendClient
+
 
 class RecallCommands(commands.Cog):
     """
@@ -9,14 +14,20 @@ class RecallCommands(commands.Cog):
     Args:
       bot: The Discord bot to link the cog to
     """
+
     ctx_parse = discord.ApplicationContext
+
     def __init__(self, bot):
         """
         Constructor.
         """
         self.bot = bot
 
-    @commands.slash_command(name="recallpoll", guild_id=[1021553449210499133], description="recalls the results of a previous poll")
+    @commands.slash_command(
+        name="recallpoll",
+        guild_id=[1021553449210499133],
+        description="recalls the results of a previous poll",
+    )
     async def recall_poll(self, ctx: ctx_parse, poll_name: str):
         """
         Function to handle the input of the /recallpoll command from the user.
