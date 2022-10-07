@@ -1,39 +1,44 @@
 
 <p align="center"><img width=60.5% src="https://i.imgur.com/Nie0pck.png"></p>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-[![Python](https://img.shields.io/badge/python-v3.7+-green.svg)](https://docs.python.org/3/)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5539956.svg)](https://doi.org/10.5281/zenodo.5539956)
-![Build Status](https://github.com/War-Keeper/ClassMateBot/actions/workflows/main.yml/badge.svg)
-[![codecov](https://codecov.io/gh/War-Keeper/ClassMateBot/branch/main/graph/badge.svg)](https://codecov.io/gh/War-Keeper/ClassMateBot)
+<hr>
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/ntgomes/PollCord/blob/main/LICENSE)
+[![Python](https://img.shields.io/badge/python-v3.10-teal.svg)](https://docs.python.org/3/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7158367.svg)](https://doi.org/10.5281/zenodo.7158367)
+![Frontend Build Status](https://github.com/ntgomes/PollCord/actions/workflows/frontend.yml/badge.svg)
+[![codecov](https://codecov.io/gh/ntgomes/PollCord/branch/main/graph/badge.svg)](https://codecov.io/gh/ntgomes/PollCord)
+
+<hr>
 
 
-# PollCord
-**Pollcord is a software created for Discord users to conduct Polls**
+## Demo Video
+https://user-images.githubusercontent.com/45674454/194601128-caa5836d-2513-425f-ac19-4d9b853542f8.mp4
 
 ### Purpose
-Discord is a social platform where users interact with each other. Creating Polls is a sophisticated way to ask questions, collect opinions especially with large number of users. However, Discord currently provides a basic functionality to create Polls. PollCord provides a comprehensive solution in conducting Polls. PollCord is built using NextCord, which is a cutting edge API wrapper for Discord, to create a modern interactive experience compared to most other Discord poll bots
+Discord is a social platform where users interact with each other through servers, channels, and separate chats for various reasons. Creating polls is a common way to ask questions and collect opinions, especially with large number of users. However, existing Discord bots and UIs currently provides a simplified version of creating and managing polls. 
+
+Pollcord is a software created for Discord users to conduct polls, providing a comprehensive solution in conducting polls. PollCord is built using Pycord, which is a cutting edge API wrapper for Discord, to create a modern interactive experience compared to most other Discord poll bots.
 
 
 ## PollCord Features
-
-- Easy & User Friendly Interface to create Polls
-- Create & Aggregate Multiple Polls onto a single poll
-- Creator Only Permissions
-- Upper limit of upto 25 options for each poll 
-- Comprehenive Database to store and Recall/ Extract Poll results whenever needed
+- Easy & user friendly interface to create polls
+- Create & aggregate Multiple questions onto a single poll
+- Creator-only permissions
+- Up to 25 options for each poll question
+- Integrated database to store and recall/extract poll results whenever needed
 
 
 ## Documentation
 
-[Documentation](https://github.com/ntgomes/PollCord/tree/main/docs)
+[Documentation](https://ntgomes.github.io/PollCord)
 
 
 ## Future Scope
 
-- Compatible with Different Applications: With some changes to the Frontend, PollCord can be scaled to implement on different Applications like Slack, Microsoft Teams
-- Enhanced functionality with Polls: PollCord can be modified to incorporate additional features along with polls. Features like forms linked with individual users can also be added
+- *Open-ended text questions for polls*: By augmenting the requirements of a question given the flexible database design, PollCord can support open-ended text questions as opposed to only multiple-choice questions
+- *Compatible with different applications*: By only requiring changes to the frontend, PollCord can be scaled to implement on different Applications like Slack, Microsoft Teams
+- *Enhanced functionality with polls*: PollCord can be modified to incorporate additional features along with polls. Features like forms linked with individual users can also be added
 
 
 ### Authors
