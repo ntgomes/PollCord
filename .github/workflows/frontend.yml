@@ -14,7 +14,8 @@ jobs:
     steps:
     - uses: actions/checkout@master
       # Required by sphinx-notes@pages
-      fetch-depth: 0
+      with:
+        fetch-depth: 0
     - name: Set up Python 3.10
       uses: actions/setup-python@v2
       with:
