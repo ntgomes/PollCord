@@ -24,35 +24,26 @@ cd backend
 ```
 npm install
 ```
-4. Install postgres DB locally
-for mac users run the following commands on local
+
+4. Create a user in the postgresql db using the following command
 ```
-brew install postgresql
-brew services start postgresql
- psql postgres
-```
-If you are on Window follow the below documetation
-```
-https://www.postgresql.org/download/windows/
-```
-5. Create a user in the postgresql db using the following command
-```
-CREATE USER postgres; 
-  ```
+CREATE USER postgres
+ ```
  
-  6. Create a default Postgres Database and grant all permissions to the above user
+5. Create a default Postgres Database and grant all permissions to the above user
 ```
 CREATE DATABASE postgres
 GRANT ALL
     ON postgres
     TO postgres
+    
 ``` 
-7. Change the values in the .env file according to the Postgres installation and run the following commands
+6. Change the values in the .env file according to the Postgres installation and run the following commands
 ``` 
 npm run setup
 ```
 
-8. Run the server Script
+7. Run the server Script
 ```
 node run start
 ```
