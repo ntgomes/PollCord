@@ -22,15 +22,28 @@ cd backend
 
 3. Start a terminal/ Command prompt session and run npm
 ```
-npm clean install
+npm install
 ```
 
-4. Change the .env file according to the Postgres installation and run the following commands
+4. Create a user in the postgresql db using the following command
+```
+CREATE USER postgres
+ ```
+ 
+5. Create a default Postgres Database and grant all permissions to the above user
+```
+CREATE DATABASE postgres
+GRANT ALL
+    ON postgres
+    TO postgres
+    
+``` 
+6. Change the values in the .env file according to the Postgres installation and run the following commands
 ``` 
 npm run setup
 ```
 
-5. Run the server Script
+7. Run the server Script
 ```
-node server.js
+node run start
 ```
