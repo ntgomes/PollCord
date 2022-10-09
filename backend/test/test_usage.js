@@ -2,9 +2,12 @@ require("dotenv").config();
 const postgresql = require("../postgresql");
 var connection = postgresql();
 const needle = require("needle");
+var clc = require("cli-color");
 
 // console.log(process.env);
 // console.log(process.env.POSTGRES_DATABASE_NAME);
+
+console.log("Started testing ...");
 
 const data = {
     guild_id: 1294898935,
@@ -26,64 +29,142 @@ const data = {
     },
 };
 
-// remove all data from all tables, assuming that tables exist
-(async () => {
-    // console.log(connection);
-    await connection
-        .query(
-            `
-        TRUNCATE polls CASCADE;
-        `
-        )
-        .then(() => {
-            console.log("Deleted all content");
+var succesfull = 0;
+console.log(clc.blue("\nTrying to Delete all existing DB content"));
 
-            needle(
-                "post",
-                `http://localhost:${process.env.APP_PORT}/save`,
-                data,
-                {
-                    json: true,
-                }
+// remove all data from all tables, assuming that tables exist
+function test_setup() {
+    (async () => {
+        // console.log(connection);
+        await connection
+            .query(
+                `
+            TRUNCATE polls CASCADE;
+            `
             )
-                .then((res) => {
-                    console.log(`Status: ${res.statusCode}`);
-                    console.log("Body: ", res.body);
-                    needle(
-                        "get",
-                        `http://localhost:${process.env.APP_PORT}/recall/1294898935/my_poll2`,
-                        data,
-                        {
-                            json: true,
-                        }
-                    )
-                        .then((res) => {
-                            console.log(`Status: ${res.statusCode}`);
-                            console.log("Body: ", res.body);
-                            needle(
-                                "get",
-                                `http://localhost:${process.env.APP_PORT}/check/1294898935/my_poll2`,
-                                data,
-                                {
-                                    json: true,
-                                }
+            .then(() => {
+                console.log(clc.green("Deleted"));
+                console.log(clc.blue("\nTesting /save endpoint"));
+                needle(
+                    "post",
+                    `http://localhost:${process.env.APP_PORT}/save`,
+                    data,
+                    {
+                        json: true,
+                    }
+                )
+                    .then((res) => {
+                        console.log(clc.green(`Status: ${res.statusCode}`));
+                        // console.log("Body: ", res.body);
+                        console.log(clc.blue("\nTesting /recall endpoint"));
+                        succesfull += 1;
+
+                        needle(
+                            "get",
+                            `http://localhost:${process.env.APP_PORT}/recall/1294898935/my_poll2`,
+                            data,
+                            {
+                                json: true,
+                            }
+                        )
+                            .then((res) => {
+                                console.log(
+                                    clc.green(`Status: ${res.statusCode}`)
+                                );
+                                // console.log("Body: ", res.body);
+                                console.log(
+                                    clc.blue("\nTesting /check endpoint")
+                                );
+                                succesfull += 1;
+
+                                needle(
+                                    "get",
+                                    `http://localhost:${process.env.APP_PORT}/check/1294898935/my_poll2`,
+                                    data,
+                                    {
+                                        json: true,
+                                    }
+                                )
+                                    .then((res) => {
+                                        succesfull += 1;
+                                        console.log(
+                                            clc.green(
+                                                `Status: ${res.statusCode}`
+                                            )
+                                        );
+                                        console.log(
+                                            clc.green(
+                                                `\nSuccesfully ran: ${succesfull} out of 3 test cases.`
+                                            )
+                                        );
+                                        // console.log("Body: ", res.body);
+                                        return 1;
+                                    })
+                                    .catch((err) => {
+                                        console.error(err);
+                                        console.log(
+                                            clc.green(
+                                                `\nSuccesfully ran: ${succesfull} out of 3 test cases.`
+                                            )
+                                        );
+                                        console.log(
+                                            clc.red(
+                                                `\nFailed in: ${
+                                                    3 - succesfull
+                                                } out of 3 test cases.`
+                                            )
+                                        );
+                                        return 0;
+                                    });
+                            })
+                            .catch((err) => {
+                                console.error(err);
+                                console.log(
+                                    clc.green(
+                                        `\nSuccesfully ran: ${succesfull} out of 3 test cases.`
+                                    )
+                                );
+                                console.log(
+                                    clc.red(
+                                        `\nFailed in: ${
+                                            3 - succesfull
+                                        } out of 3 test cases.`
+                                    )
+                                );
+                                return 0;
+                            });
+                    })
+                    .catch((err) => {
+                        console.error(err);
+                        console.log(
+                            clc.green(
+                                `\nSuccesfully ran: ${succesfull} out of 3 test cases.`
                             )
-                                .then((res) => {
-                                    console.log(`Status: ${res.statusCode}`);
-                                    console.log("Body: ", res.body);
-                                })
-                                .catch((err) => {
-                                    console.error(err);
-                                });
-                        })
-                        .catch((err) => {
-                            console.error(err);
-                        });
-                })
-                .catch((err) => {
-                    console.error(err);
-                });
-        });
-})().catch((err) => {
-    console.error(err);
-});
+                        );
+                        console.log(
+                            clc.red(
+                                `\nFailed in: ${
+                                    3 - succesfull
+                                } out of 3 test cases.`
+                            )
+                        );
+                        return 0;
+                    });
+            });
+    })().catch((err) => {
+        console.error(err);
+        console.log(
+            clc.green(`\nSuccesfully ran: ${succesfull} out of 3 test cases.`)
+        );
+        console.log(
+            clc.red(`\nFailed in : ${3 - succesfull} out of 3 test cases.`)
+        );
+        return 0;
+    });
+}
+
+if (typeof require !== "undefined" && require.main === module) {
+    test_setup();
+}
+
+module.exports = { test_setup };

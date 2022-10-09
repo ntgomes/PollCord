@@ -5,8 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "mocha",
-    "setup": "node setup/setup.js"
+    "test": "node test/test_usage.js",
+    "setup": "node setup/setup.js",
+    "coverage": "nyc npm run test"
   },
   "keywords": [],
   "author": "Vishal, Abhimanyu, Tyler, Neeloy, Abhishek",
@@ -19,11 +20,11 @@
     "pg": "^8.8.0"
   },
   "devDependencies": {
+    "cli-color": "^2.0.3",
     "eslint": "^8.24.0",
-    "mocha": "^10.0.0",
     "needle": "^3.1.0",
     "nodemon": "^2.0.20",
-    "request": "^2.88.2",
-    "sinon": "^14.0.1"
+    "nyc": "^15.1.0",
+    "request": "^2.88.2"
   }
 }
