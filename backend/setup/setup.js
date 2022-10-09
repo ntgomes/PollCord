@@ -3,6 +3,7 @@ require("dotenv").config();
 const postgresql = require("../postgresql");
 
 var connection = postgresql();
+
 connection
     .query(
         `
@@ -19,7 +20,7 @@ connection
                 `
         CREATE TABLE IF NOT EXISTS questions (
             questionId SERIAL PRIMARY KEY,
-            pollId int REFERENCES polls(pollId), 
+            pollId int REFERENCES polls(pollId),
             questionText varchar NOT NULL
         );
         `
@@ -36,7 +37,7 @@ connection
             `
                     )
                     .then(() => {
-                        console.log("DB creation successfull");
+                        console.log("DB creation succesfull");
                     });
             });
     });
