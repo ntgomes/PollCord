@@ -32,7 +32,7 @@ def main():
     @bot.event
     async def on_message(message):
         """
-        Callback function used by Pycord for when the bot recieves a message in Discord.
+        Callback function used by Pycord for when the bot receives a message in Discord.
         Logs the message if it wasn't from the bot itself.
         """
         if message.author == bot.user:
@@ -41,8 +41,9 @@ def main():
 
     bot.add_cog(poll_commands.MakerCommands.MakerCommands(bot))
     bot.add_cog(poll_commands.RecallCommands.RecallCommands(bot))
-    bot.run(DISCORD_TOKEN)
+    return bot, DISCORD_TOKEN
 
 
 if __name__ == "__main__":
-    main()
+    bot, DISCORD_TOKEN = main()
+    bot.run(DISCORD_TOKEN)
