@@ -1,0 +1,22 @@
+:py:mod:`frontend.test.test_views`
+==================================
+
+.. py:module:: frontend.test.test_views
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   frontend.test.test_views.test_inits
+
+
+
+.. py:function:: test_inits()
+
+

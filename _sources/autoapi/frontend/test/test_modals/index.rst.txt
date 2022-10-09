@@ -1,0 +1,26 @@
+:py:mod:`frontend.test.test_modals`
+===================================
+
+.. py:module:: frontend.test.test_modals
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   frontend.test.test_modals.test_modals
+   frontend.test.test_modals.test_callback
+
+
+
+.. py:function:: test_modals()
+
+
+.. py:function:: test_callback()
+
+
