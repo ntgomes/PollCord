@@ -4,9 +4,6 @@ var connection = postgresql();
 const needle = require("needle");
 var clc = require("cli-color");
 
-// console.log(process.env);
-// console.log(process.env.POSTGRES_DATABASE_NAME);
-
 console.log("Started testing ...");
 
 const data = {
@@ -35,7 +32,6 @@ console.log(clc.blue("\nTrying to Delete all existing DB content"));
 // remove all data from all tables, assuming that tables exist
 function test_setup() {
     (async () => {
-        // console.log(connection);
         await connection
             .query(
                 `
@@ -55,7 +51,6 @@ function test_setup() {
                 )
                     .then((res) => {
                         console.log(clc.green(`Status: ${res.statusCode}`));
-                        // console.log("Body: ", res.body);
                         console.log(clc.blue("\nTesting /recall endpoint"));
                         succesfull += 1;
 
@@ -71,7 +66,6 @@ function test_setup() {
                                 console.log(
                                     clc.green(`Status: ${res.statusCode}`)
                                 );
-                                // console.log("Body: ", res.body);
                                 console.log(
                                     clc.blue("\nTesting /check endpoint")
                                 );
@@ -97,7 +91,6 @@ function test_setup() {
                                                 `\nSuccesfully ran: ${succesfull} out of 3 test cases.`
                                             )
                                         );
-                                        // console.log("Body: ", res.body);
                                         return 1;
                                     })
                                     .catch((err) => {
