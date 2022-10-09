@@ -15,12 +15,23 @@
 ## Demo Video
 https://user-images.githubusercontent.com/45674454/194601128-caa5836d-2513-425f-ac19-4d9b853542f8.mp4
 
-### Purpose
+## Purpose
 Discord is a social platform where users interact with each other through servers, channels, and separate chats for various reasons. Creating polls is a common way to ask questions and collect opinions, especially with large number of users. However, existing Discord bots and UIs currently provides a simplified version of creating and managing polls. 
 
 Pollcord is a software created for Discord users to conduct polls, providing a comprehensive solution in conducting polls. PollCord is built using Pycord, which is a cutting edge API wrapper for Discord, to create a modern interactive experience compared to most other Discord poll bots.
 
+## Target Audiences
+PollCord caters to almost anyone & everyone who uses Discord for interacting with each other especially in groups. 
 
+**Some example scenarios where PollCord can be used**
+- **Academic setting**:
+   - Professors can use PollCord to ask questions/ opinions of students for anything related to the course 
+   - A group of students can use PollCord to conduct polls can come up to a common consensus on anything
+- **Influencer related Communities**:
+   - Influencer's often use discord to connect with their followers. PollCord can be a great tool for these influencers to know more about their follower's opinions on their products/ campaign/ posts/ videos, etc
+- **Gaming Communities**:
+   - Discord is highly popular among gamer's and Pollcord can be highly popular among them as well. Gamer's can use PollCord to interact with each other and get to know their opinions on a particular game or tool
+   
 ## PollCord Features
 - Easy & user friendly interface to create polls
 - Create & aggregate Multiple questions onto a single poll
@@ -31,7 +42,7 @@ Pollcord is a software created for Discord users to conduct polls, providing a c
 
 ## Documentation
 
-[Documentation](https://ntgomes.github.io/PollCord)
+You can know more about PollCord and other [Documentation here](https://ntgomes.github.io/PollCord)
 
 
 ## Future Scope
