@@ -1,8 +1,9 @@
 # Project 1 Rubric
 by Neeloy Gomes, Abhishek Gupta, Vishal Veera Reddy, Abhimanyu Bellam, and Tyler Craine
 
-Prepare a markdown with **three** columns:
+[Link to Software Sustainability Evaluation](https://docs.google.com/document/d/1k2DjhF5FNBdrbnKM86LkAJ8RXrpf5bU0YERpgEMQpv4/edit?usp=sharing)
 
+This rubric was prepared by using a table that follows as below:
 -   Column1 has all the following points PLUS all the points from the [Software Sustainability Evaluation](https://docs.google.com/forms/d/e/1FAIpQLSf0ccsVdN-nXJCHLluJ-hANZlp8rDKgprJa0oTYiLZSDxh3DA/viewform).
 -   Column2 is your self-assessment. For each items, score yourself zero (none), one (a litte), two (somewhat), three (a lot).
 -   Column3 is for any links you are adding to support your claim in column two.
@@ -69,15 +70,15 @@ Prepare a markdown with **three** columns:
 |Does your software allow data to be imported and exported using open data formats? e.g. GIF, SVG, HTML, XML, tar, zip, CSV, JSON, NetCDF, or domain specific one| 3|Import and export JSON as in the recall endpoint from DB|
 |Does your software allow communications using open communications protocols?| 2|Open data formats and communication with Discord
 |Is your software cross-platform compatible?| 3|Works on Windows, Mac, Linux, etc.
-|Does your software adhere to appropriate accessibility conventions or standards?| 1 - some is through the nature of Discord UI, not much else|
-|Does your documentation adhere to appropriate accessibility conventions or standards?| 2 - responsive design and website accessibility options|
+|Does your software adhere to appropriate accessibility conventions or standards?| 1 | Some is through the nature of Discord UI, not much else|
+|Does your documentation adhere to appropriate accessibility conventions or standards?| 2 | Responsive design and website accessibility options|
 |Is your source code stored in a repository under revision control?| 3|All code in Github|
 |Is each source code release a snapshot of the repository?| 3|Each release in GitHub is represented in snapshots
 |Are releases tagged in the repository?| 3|Releases tagged in github|
 |Is there a branch of the repository that is always stable? (i.e. tests always pass, code always builds successfully)| 3|main branch
 |Do you back-up your repository?| 3|On Github and local machines|
 |Do you provide publicly-available instructions for building your software from the source code?| 3|In INSTALLATION.md for frontend and backend|
-|Can you build, or package, your software using an automated tool?| 2 - only frontend can be automated|
+|Can you build, or package, your software using an automated tool?| 2 | Only frontend can be automated|
 |Do you provide publicly-available instructions for deploying your software?| 1|Only partially mentioned in INSTALLATION.md for frontend and backend|
 |Does your documentation list all third-party dependencies?| 3|https://github.com/ntgomes/PollCord/network/dependencies|
 |Does your documentation list the version number for all third-party dependencies?| 3|https://github.com/ntgomes/PollCord/network/dependencies|
