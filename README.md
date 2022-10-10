@@ -5,7 +5,7 @@
 
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/ntgomes/PollCord/blob/main/LICENSE)
 [![Python](https://img.shields.io/badge/python-v3.10-teal.svg)](https://docs.python.org/3/)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7158367.svg)](https://doi.org/10.5281/zenodo.7158367)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7179310.svg)](https://doi.org/10.5281/zenodo.7179310)
 ![Frontend Build Status](https://github.com/ntgomes/PollCord/actions/workflows/frontend.yml/badge.svg)
 [![codecov](https://codecov.io/gh/ntgomes/PollCord/branch/main/graph/badge.svg)](https://codecov.io/gh/ntgomes/PollCord)
 

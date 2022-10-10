@@ -23,7 +23,7 @@ authors:
     email: guptabhishek785@gmail.com
 identifiers:
   - type: url
-    value: 'https://doi.org/10.5281/zenodo.7158367'
+    value: 'https://doi.org/10.5281/zenodo.7179310'
 url: 'https://github.com/ntgomes/PollCord'
 abstract: >-
   Pollcord is a software created for Discord users to conduct polls, providing a comprehensive solution in conducting polls. PollCord is built using Pycord, which is a cutting edge API wrapper for Discord, to create a modern interactive experience compared to most other Discord poll bots
