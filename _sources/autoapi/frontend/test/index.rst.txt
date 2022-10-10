@@ -10,6 +10,12 @@ Submodules
    :titlesonly:
    :maxdepth: 1
 
+   RecallCommands/index.rst
+   test_MakerCommands/index.rst
    test_api/index.rst
+   test_bot/index.rst
+   test_modals/index.rst
+   test_questions/index.rst
+   test_views/index.rst
 
 

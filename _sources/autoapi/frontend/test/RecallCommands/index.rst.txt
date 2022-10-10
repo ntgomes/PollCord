@@ -1,0 +1,22 @@
+:py:mod:`frontend.test.RecallCommands`
+======================================
+
+.. py:module:: frontend.test.RecallCommands
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   frontend.test.RecallCommands.test_make_poll
+
+
+
+.. py:function:: test_make_poll()
+
+
